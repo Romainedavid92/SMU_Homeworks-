@@ -4,7 +4,7 @@ import csv
 print("Election Results")
 print("-----------------------------------")
 
-filepath = os.path.join('Instructions/PyPoll/Resources/election_data.csv')
+filepath = os.path.join('election_data.csv')
 
 # Total Voters
 voters = 0
@@ -61,7 +61,7 @@ print(f"Winner: {winning_candidate}")
 print("--------------------------")
 
 #Place to save
-txt_file = Path('python-challenge/PyPoll/PyPoll.txt')
+txt_file = 'PyPoll.txt'
 with open(txt_file,"w") as txtfile:
 #Write the result in txt file
    txtfile.write("Election Results")
@@ -73,7 +73,7 @@ with open(txt_file,"w") as txtfile:
    txtfile.write("-----------------------------------")
    txtfile.write("\n")
    for i in range(len(candidates)):
-       line = str(f"{candidates[i]}: {str(vote_percent[i])} ({str(vote_count[i])})")
+       line = f"{candidates[i]}: {str(percent_votes[i])} ({str(num_votes[i])})"
        txtfile.write('{}\n'.format(line))
    txtfile.write("-----------------------------------")
    txtfile.write("\n")
