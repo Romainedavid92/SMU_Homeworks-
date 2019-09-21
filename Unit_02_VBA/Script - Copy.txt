@@ -1,0 +1,118 @@
+Sub Wolf_Of_VBA_Street():
+
+'Set Ticker Symbol as string
+Dim Ticker_Symbol As String
+
+'Set summary table row as interger
+Dim Summary_Table_Row As Integer
+Summary_Table_Row = 2
+
+'Set total stock volume as double
+Dim Total_Stock_Volume As Double
+Total_Stock_Volume = 0
+
+'Set Percent Change as Double
+Dim Percent_Change As Double
+
+'Set Yearly Change as double
+Dim Yearly_Change As Double
+
+'variable open price
+Dim Open_Price As Double
+
+'variable close price
+Dim Close_Price As Double
+
+'value for open price
+Open_Price = Cells(2, 3).Value
+
+'Inserting cell value for titles
+    Cells(1, 9).Value = "Ticker Symbol"
+    Cells(1, 10).Value = "Yearly Change"
+    Cells(1, 11).Value = "Percent Change"
+    Cells(1, 12).Value = "Total Stock Volume"
+
+'Autofitting columns
+    ThisWorkbook.Worksheets("2014").Cells.EntireColumn.AutoFit
+    ThisWorkbook.Worksheets("2015").Cells.EntireColumn.AutoFit
+    ThisWorkbook.Worksheets("2016").Cells.EntireColumn.AutoFit
+'Create LastRow call
+    LastRow = Range("A" & Rows.Count).End(xlUp).Row
+    
+'Create Variable to hold opening price
+    Dim Opening_Price As Double
+    
+    
+
+'Create loop to pull wanted information
+    For i = 2 To LastRow
+        
+        'Create If statement for when ticker changes
+        If Cells(i + 1, 1).Value <> Cells(i, 1).Value Then
+        
+            'Set the Ticker Symbol
+            Ticker_Symbol = Cells(i, 1).Value
+            
+            'Add to Total_Stock_Volume
+            Total_Stock_Volume = Total_Stock_Volume + Cells(i, 7).Value
+            
+            'Calculate Yearly Change
+            Yearly_Change = Cells(i, 6).Value - Cells(i + 1, 3).Value
+            
+                'check for dividing by zero values
+                If Cells(i + 1, 3).Value <> 0 Then
+            
+                    'Calculate yearly percent change
+                    Percent_Change = (((Cells(i, 6).Value - Cells(i + 1, 3).Value) / Cells(i + 1, 3).Value * 100))
+            
+                    'Divide by something else if dividing by zero
+                Else
+                    Cells(i + 1, 3).Value = 0.01
+                
+                End If
+            'print Yearly Change
+            Range("J" & Summary_Table_Row).Value = Yearly_Change
+            
+            'Print Yearly Percent change
+            Range("k" & Summary_Table_Row).Value = Percent_Change
+            
+            'Print Ticker Symbol
+            Range("I" & Summary_Table_Row).Value = Ticker_Symbol
+            
+            'Print Total Stock Volume
+            Range("L" & Summary_Table_Row).Value = Total_Stock_Volume
+            
+            'Add one to summary table for loop
+            Summary_Table_Row = Summary_Table_Row + 1
+            
+            'Reset Total Stock Volume
+            Total_Stock_Volume = 0
+        
+        'If the cell proceeding has the same value add to total stock volume
+        Else
+            Total_Stock_Volume = Total_Stock_Volume + Cells(i, 7).Value
+
+        
+        
+        End If
+        
+        
+    Next i
+    
+    'Last row number for summary from moderate part
+    lastrow2 = Cells(Rows.Count, 9).End(xlUp).Row
+       
+       For j = 2 To lastrow2
+           If Cells(j, 10).Value = "" Then
+               Cells(j, 10).Interior.ColorIndex = 0
+           
+           ElseIf Cells(j, 10).Value < 0 Then
+               Cells(j, 10).Interior.ColorIndex = 3
+           
+           Else: Cells(j, 10).Interior.ColorIndex = 4
+   
+        End If
+        
+       Next j
+    
+End Sub

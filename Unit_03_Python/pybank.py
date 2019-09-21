@@ -2,7 +2,7 @@ import os
 import csv
 print("Financial Analysis")
 print("-----------------------------------")
-filepath = os.path.join('Instructions/PyBank/Resources/budget_data.csv')
+filepath = os.path.join('budget_data.csv')
 # Total month
 month = 0
 with open(filepath, newline='') as the_file1:
@@ -43,3 +43,34 @@ with open(filepath, newline='') as the_file3:
 print(f'Average Change:${revenue_average}')
 print(f'Greatest Increase in Profits: {months[revenue_change.index(max(revenue_change))+1]} (${greatest_increase})')
 print(f'Greatest Decrease in Profits: {months[revenue_change.index(min(revenue_change))+1]} (${greatest_decrease})')
+
+
+# Displaying results
+#print("Election Results")
+#print("--------------------------")
+#print(f"Total Votes: {str(voters)}")
+
+
+#Place to save
+txt_file = 'PyBank.txt'
+with open(txt_file,"w") as txtfile:
+#Write the result in txt file
+   txtfile.write("Finacial Analysis")
+   txtfile.write("\n")
+   txtfile.write("-----------------------------------")
+   txtfile.write("\n")
+   txtfile.write(f'Total Months : {month}')
+   txtfile.write("\n")
+   txtfile.write("-----------------------------------")
+   txtfile.write("\n")
+   txtfile.write(f'Average Change:${revenue_average}')
+   txtfile.write("\n")
+   txtfile.write(f'Greatest Increase in Profits: {months[revenue_change.index(max(revenue_change))+1]} (${greatest_increase})')
+   txtfile.write("\n")
+   txtfile.write(f'Greatest Decrease in Profits: {months[revenue_change.index(min(revenue_change))+1]} (${greatest_decrease})')
+   txtfile.write("\n")
+   txtfile.write("-----------------------------------")
+   txtfile.write("\n")
+   txtfile.write(f"Total: {total}") 
+   txtfile.write("\n")
+   txtfile.write("-----------------------------------")
