@@ -13,4 +13,3 @@ WHERE
 	d.dept_name= 'Sales'
 OR 
 	d.dept_name= 'Development'
-ORDER BY
