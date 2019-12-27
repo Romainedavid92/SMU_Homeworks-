@@ -89,15 +89,15 @@ function renderCircles(circlesGroup, newXScale, chosenXAxis) {
 }  
 
 
-function renderyCircles(ycirclesGroup, newYScale, chosenYAxis) {
+function renderyCircles(circlesGroup, newYScale, chosenYAxis) {
 
-  ycirclesGroup.transition()
+  circlesGroup.transition()
     .duration(1000)
     .attr("cy",d => newYScale(d[chosenYAxis]))
   
 
 
-  return ycirclesGroup;
+  return circlesGroup;
 }
 
 
@@ -137,9 +137,9 @@ function updateToolTip(chosenXAxis, circlesGroup) {
   return circlesGroup;
 }
 
-function updateToolTip(chosenYAxis, ycirclesGroup) {
+function updateToolTip(chosenYAxis, circlesGroup) {
 
-  if (chosenXAxis === "wOBA") {
+  if (chosenYAxis === "wOBA") {
     var label = "wOBA:"
     var label2 = "ERA:"
   }
@@ -158,9 +158,9 @@ function updateToolTip(chosenYAxis, ycirclesGroup) {
       return (`${d.Player_Last},${d.Player_First}<br>${label} ${d[chosenXAxis]}<br>${label2} ${d[chosenYAxis]}`);
     });
 
-  ycirclesGroup.call(toolTip);
+  circlesGroup.call(toolTip);
 
-  ycirclesGroup.on("mouseover", function(data) {
+  circlesGroup.on("mouseover", function(data) {
     toolTip.show(data);
   })
     // onmouseout event
@@ -168,7 +168,7 @@ function updateToolTip(chosenYAxis, ycirclesGroup) {
       toolTip.hide(data);
     });
 
-  return ycirclesGroup;
+  return circlesGroup;
 }
 
 // Retrieve data from the CSV file and execute everything below
@@ -333,10 +333,10 @@ d3.csv("pitcherData.csv").then(function(pitcherData, err) {
       yAxis = renderYAxes(yLinearScale, yAxis);
 
     // updates circles with new y values
-      ycirclesGroup = renderyCircles(ycirclesGroup, yLinearScale, chosenYAxis);
+      circlesGroup = renderyCircles(circlesGroup, yLinearScale, chosenYAxis);
 
     // updates tooltips with new info
-      ycirclesGroup = updateToolTip(chosenYAxis, ycirclesGroup);
+      circlesGroup = updateToolTip(chosenYAxis, circlesGroup);
 
     // changes classes to change bold text
     if (chosenYAxis === "wOBA") {
